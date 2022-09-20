@@ -23,6 +23,7 @@ class Watchlist(models.Model):
     title = models.CharField(max_length=255)
     descriptions = models.CharField(max_length=500)
     type = models.CharField(max_length=10, choices=Type.choices, default=Type.MOVIE)
+    platform = models.ForeignKey(StreamPlatform, on_delete=models.CASCADE, related_name='watchlist', blank=True, null=True)
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)

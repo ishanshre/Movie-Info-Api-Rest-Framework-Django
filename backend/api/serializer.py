@@ -16,7 +16,7 @@ class WatchlistSerializer(serializers.ModelSerializer):
     descriptions = serializers.CharField(validators=[len_descriptions])
     class Meta:
         model = Watchlist
-        fields = ['id','title','descriptions','type','active', 'created','updated']
+        fields = ['id','title','descriptions','type','platform','active', 'created','updated']
         
 
     # def create(self, validated_data):
@@ -48,6 +48,6 @@ class WatchlistSerializer(serializers.ModelSerializer):
 class StreamPlatformSerializer(serializers.ModelSerializer):
     class Meta:
         model = StreamPlatform
-        fields = ['id','name','about','website', 'active', 'created', 'updated']
+        fields = ['id','name','about','website','active', 'created', 'updated']
 
     
