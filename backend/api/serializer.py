@@ -14,6 +14,7 @@ def len_descriptions(value):
 class WatchlistSerializer(serializers.ModelSerializer):
     title = serializers.CharField(validators=[len_title])
     descriptions = serializers.CharField(validators=[len_descriptions])
+    platform = serializers.HyperlinkedRelatedField(read_only=True, view_name='api:stream_detail')#returns __str__ of streamplatform
     class Meta:
         model = Watchlist
         fields = ['id','title','descriptions','type','platform','active', 'created','updated']
@@ -46,8 +47,10 @@ class WatchlistSerializer(serializers.ModelSerializer):
 
 
 class StreamPlatformSerializer(serializers.ModelSerializer):
+    #watchlist = WatchlistSerializer(many=True, read_only=True)
+    watchlist = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='api:watchlist_detail')
     class Meta:
         model = StreamPlatform
-        fields = ['id','name','about','website','active', 'created', 'updated']
+        fields = ['id','name','about','website','active', 'watchlist', 'created', 'updated']
 
     
