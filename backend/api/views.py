@@ -5,22 +5,22 @@ Using function Based view
 
 
 # from django.shortcuts import render
-# from .serializer import MovieSerializer
-# from apps_watchlist.models import Movie
+# from .serializer import WatchlistSerializer
+# from apps_watchlist.models import Watchlist
 # from rest_framework.response import Response
 # from rest_framework.decorators import api_view
 # from rest_framework import status
 # # Create your views here.
 
 # @api_view(['GET', 'POST'])
-# def movielist(request):
+# def Watchlistlist(request):
 #     if request.method =='GET':
-#         movie = Movie.objects.all()
-#         serializer = MovieSerializer(movie, many=True)
+#         Watchlist = Watchlist.objects.all()
+#         serializer = WatchlistSerializer(Watchlist, many=True)
 #         return Response(serializer.data)
 
 #     elif request.method == 'POST':
-#         serializer = MovieSerializer(data=request.data)
+#         serializer = WatchlistSerializer(data=request.data)
 #         if serializer.is_valid():
 #             serializer.save()
 #             return Response(serializer.data)
@@ -29,15 +29,15 @@ Using function Based view
 
 
 # @api_view(['GET', 'PUT','DELETE'])
-# def moviedetail(request, pk):
+# def Watchlistdetail(request, pk):
 #     if request.method == 'GET':
-#         movie = Movie.objects.get(pk=pk)
-#         serializer = MovieSerializer(movie)
+#         Watchlist = Watchlist.objects.get(pk=pk)
+#         serializer = WatchlistSerializer(Watchlist)
 #         return Response(serializer.data)
 
 #     if request.method =="PUT":
-#         movie = Movie.objects.get(pk=pk)
-#         serializer = MovieSerializer(movie, data=request.data)
+#         Watchlist = Watchlist.objects.get(pk=pk)
+#         serializer = WatchlistSerializer(Watchlist, data=request.data)
 #         if serializer.is_valid():
 #             serializer.save()
 #             return Response(serializer.data)
@@ -46,8 +46,8 @@ Using function Based view
     
     
 #     if request.method == "DELETE":
-#         movie = Movie.objects.get(pk=pk)
-#         movie.delete()
+#         Watchlist = Watchlist.objects.get(pk=pk)
+#         Watchlist.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # """
@@ -55,15 +55,15 @@ Using function Based view
 # """
 # from rest_framework import mixins
 # from rest_framework import generics
-# from .serializer import MovieSerializer
-# from apps_watchlist.models import Movie
+# from .serializer import WatchlistSerializer
+# from apps_watchlist.models import Watchlist
 
 
-# class MovieList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
-#     serializer_class = MovieSerializer
+# class WatchlistList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+#     serializer_class = WatchlistSerializer
 
 #     def get_queryset(self):
-#         return Movie.objects.all()
+#         return Watchlist.objects.all()
     
 #     def get(self, request, *args, **kwargs):
 #         return self.list(request, *args, **kwargs)
@@ -72,10 +72,10 @@ Using function Based view
 #         return self.create(request, *args, **kwargs)
 
 
-# class MovieDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
-#     serializer_class = MovieSerializer
+# class WatchlistDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+#     serializer_class = WatchlistSerializer
     
-#     queryset = Movie.objects.all()
+#     queryset = Watchlist.objects.all()
 
 #     def get(self, request, *args, **kwargs):
 #         return self.retrieve(request, *args,**kwargs)
@@ -87,19 +87,19 @@ Using function Based view
 #         return self.delete(request, *args, **kwargs)
 
 
-from .serializer import MovieSerializer
+from .serializer import WatchlistSerializer
 from rest_framework import generics
-from apps_watchlist.models import Movie
+from apps_watchlist.models import Watchlist
 
 
-class MovieList(generics.ListCreateAPIView):
-    serializer_class = MovieSerializer
-
-    def get_queryset(self):
-        return Movie.objects.all()
-
-class MovieRetrieveUpdateDestroyApiView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = MovieSerializer
+class WatchlistList(generics.ListCreateAPIView):
+    serializer_class = WatchlistSerializer
 
     def get_queryset(self):
-        return Movie.objects.all()
+        return Watchlist.objects.all()
+
+class WatchlistRetrieveUpdateDestroyApiView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = WatchlistSerializer
+
+    def get_queryset(self):
+        return Watchlist.objects.all()

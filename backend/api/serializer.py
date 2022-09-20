@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps_watchlist.models import Movie
+from apps_watchlist.models import Watchlist
 
 
 def len_title(value):
@@ -11,16 +11,16 @@ def len_descriptions(value):
         raise serializers.ValidationError("Description is two short. It must be greater than 30 characters")
 
 
-class MovieSerializer(serializers.ModelSerializer):
+class WatchlistSerializer(serializers.ModelSerializer):
     title = serializers.CharField(validators=[len_title])
     descriptions = serializers.CharField(validators=[len_descriptions])
     class Meta:
-        model = Movie
+        model = Watchlist
         fields = ['id','title','descriptions','active']
         
 
     # def create(self, validated_data):
-    #     return Movie.objects.create(validated_data)
+    #     return Watchlist.objects.create(validated_data)
     
     # def update(self, instance, validated_data):
     #     instance.title = validated_data.get('title', instance.title)
@@ -40,7 +40,7 @@ class MovieSerializer(serializers.ModelSerializer):
     '''Object level validation we call a method to add logic to validate the data'''
     def validate(self, data):
         if data['title']==data['descriptions']:
-            raise serializers.ValidationError("Title and description of movie must not be same")
+            raise serializers.ValidationError("Title and description of Watchlist must not be same")
         else:
             return data
 

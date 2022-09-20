@@ -4,9 +4,9 @@ app_name = 'api'
 
 
 urlpatterns = [
-    path('', views.MovieList.as_view()),
-   # path('<int:pk>/', views.MovieDetail.as_view()),
-    path('<int:pk>/', views.MovieList.as_view()),
-    # path('<int:pk>/', views.moviedetail),
-    path('<int:pk>/crud/', views.MovieRetrieveUpdateDestroyApiView.as_view())
+    path('', views.WatchlistList.as_view()),
+   # path('<int:pk>/', views.WatchlistDetail.as_view()),
+    path('<int:pk>/', views.WatchlistList.as_view()),
+    # path('<int:pk>/', views.Watchlistdetail),
+    path('<int:pk>/crud/', views.WatchlistRetrieveUpdateDestroyApiView.as_view())
 ]
