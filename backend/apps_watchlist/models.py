@@ -1,7 +1,13 @@
 from django.db import models
 
 # Create your models here.
+class StreamPlatform(models.Model):
+    name = models.CharField(max_length=255)
+    about = models.CharField(max_length=255)
+    website = models.URLField(max_length=255)
 
+    def __str__(self):
+        return self.name
 
 
 class Watchlist(models.Model):

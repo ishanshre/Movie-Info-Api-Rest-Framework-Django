@@ -16,7 +16,7 @@ class WatchlistSerializer(serializers.ModelSerializer):
     descriptions = serializers.CharField(validators=[len_descriptions])
     class Meta:
         model = Watchlist
-        fields = ['id','title','descriptions','active']
+        fields = ['id','title','descriptions','type','active', 'created','updated']
         
 
     # def create(self, validated_data):
