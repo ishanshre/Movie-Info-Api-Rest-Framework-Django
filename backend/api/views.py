@@ -50,38 +50,56 @@ Using function Based view
 #         movie.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
-"""
-Using Mixins. one of the class based views
-"""
-from rest_framework import mixins
-from rest_framework import generics
+# """
+# Using Mixins. one of the class based views
+# """
+# from rest_framework import mixins
+# from rest_framework import generics
+# from .serializer import MovieSerializer
+# from apps_watchlist.models import Movie
+
+
+# class MovieList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+#     serializer_class = MovieSerializer
+
+#     def get_queryset(self):
+#         return Movie.objects.all()
+    
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
+
+# class MovieDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+#     serializer_class = MovieSerializer
+    
+#     queryset = Movie.objects.all()
+
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args,**kwargs)
+    
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, *args, **kwargs)
+    
+#     def delete(self, request, *args, **kwargs):
+#         return self.delete(request, *args, **kwargs)
+
+
 from .serializer import MovieSerializer
+from rest_framework import generics
 from apps_watchlist.models import Movie
 
 
-class MovieList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+class MovieList(generics.ListCreateAPIView):
     serializer_class = MovieSerializer
 
     def get_queryset(self):
         return Movie.objects.all()
-    
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-
-class MovieDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+class MovieRetrieveUpdateDestroyApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MovieSerializer
-    
-    queryset = Movie.objects.all()
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args,**kwargs)
-    
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    
-    def delete(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
+    def get_queryset(self):
+        return Movie.objects.all()
