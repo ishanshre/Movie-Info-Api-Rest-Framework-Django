@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps_watchlist.models import Watchlist, StreamPlatform
+from apps_watchlist.models import Watchlist, StreamPlatform, Review
 
 
 def len_title(value):
@@ -10,14 +10,21 @@ def len_descriptions(value):
     if len(value)<30:
         raise serializers.ValidationError("Description is two short. It must be greater than 30 characters")
 
+class ReviewSerializer(serializers.ModelSerializer):
+    watchlist = serializers.HyperlinkedRelatedField(read_only=True, view_name='api:watchlist_detail')
+    class Meta:
+        model = Review
+        fields = '__all__'
+
 
 class WatchlistSerializer(serializers.ModelSerializer):
     title = serializers.CharField(validators=[len_title])
     descriptions = serializers.CharField(validators=[len_descriptions])
     platform = serializers.HyperlinkedRelatedField(read_only=True, view_name='api:stream_detail')#returns __str__ of streamplatform
+    reviews = ReviewSerializer(many=True, read_only=True)
     class Meta:
         model = Watchlist
-        fields = ['id','title','descriptions','type','platform','active', 'created','updated']
+        fields = ['id','title','descriptions','type','platform','active','reviews', 'created','updated']
         
 
     # def create(self, validated_data):

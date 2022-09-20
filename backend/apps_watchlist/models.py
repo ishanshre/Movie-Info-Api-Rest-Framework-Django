@@ -41,4 +41,4 @@ class Review(models.Model):
     watchlist = models.ForeignKey(Watchlist, on_delete=models.CASCADE, related_name='reviews')
 
     def __str__(self):
-        return self.rating
+        return f"{self.watchlist.title}: Rating-{str(self.rating)}"

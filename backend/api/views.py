@@ -87,9 +87,9 @@ Using function Based view
 #         return self.delete(request, *args, **kwargs)
 
 
-from .serializer import WatchlistSerializer, StreamPlatformSerializer
+from .serializer import WatchlistSerializer, StreamPlatformSerializer, ReviewSerializer
 from rest_framework import generics
-from apps_watchlist.models import Watchlist, StreamPlatform
+from apps_watchlist.models import Watchlist, StreamPlatform, Review
 
 
 class WatchlistList(generics.ListCreateAPIView):
@@ -113,3 +113,13 @@ class StreamPlatformListCreateApiView(generics.ListCreateAPIView):
 class StreamPlatformRetriveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = StreamPlatformSerializer
     queryset = StreamPlatform.objects.all()
+
+
+class ReviewListCreateApiView(generics.ListCreateAPIView):
+    serializer_class = ReviewSerializer
+    queryset = Review.objects.all()
+
+
+class ReviewRetriveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ReviewSerializer
+    queryset = Review.objects.all()
