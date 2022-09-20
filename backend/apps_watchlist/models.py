@@ -5,7 +5,9 @@ class StreamPlatform(models.Model):
     name = models.CharField(max_length=255)
     about = models.CharField(max_length=255)
     website = models.URLField(max_length=255)
-
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True, null=True)
+    active = models.BooleanField(default=True,blank=True, null=True)
     def __str__(self):
         return self.name
 

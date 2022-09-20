@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps_watchlist.models import Watchlist
+from apps_watchlist.models import Watchlist, StreamPlatform
 
 
 def len_title(value):
@@ -43,5 +43,11 @@ class WatchlistSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Title and description of Watchlist must not be same")
         else:
             return data
+
+
+class StreamPlatformSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StreamPlatform
+        fields = ['id','name','about','website', 'active', 'created', 'updated']
 
     
